@@ -7,7 +7,7 @@ public class Car {
   protected short hp = 100;
   private String licensePlate = "";
   private int currentSpeed;
-  final String CAR_BRAND;
+  public final String CAR_BRAND;
 
   // Konstruktor(en)
   public Car(String parameterColor, short parameterHp, String parameterBrand, String parameterLicensePlate){
@@ -20,7 +20,7 @@ public class Car {
   }
 
   // Methoden
-  void accelerate(int accelerationSpeed){
+  public void accelerate(int accelerationSpeed){
     if(accelerationSpeed < hp / 10){
       currentSpeed = currentSpeed + accelerationSpeed;
     } else {
@@ -28,14 +28,14 @@ public class Car {
     }
   }
 
-  void brake(){
+  public void brake(){
     currentSpeed = currentSpeed - 10;
     if(currentSpeed < 0){
       currentSpeed = 0;
     }
   }
 
-  void fullBrake(){
+  public void fullBrake(){
     currentSpeed = 0;
   }
 
@@ -47,7 +47,7 @@ public class Car {
   }
    */
 
-  int getCurrentSpeed(){
+  public int getCurrentSpeed(){
     return currentSpeed;
   }
 

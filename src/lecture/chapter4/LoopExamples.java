@@ -8,13 +8,16 @@ public class LoopExamples {
 
     System.out.println("While Schleife:");
     while(count <= 10){
-      if(count % 2 != 0){
+      int evenDeterminator = 2;
+      if(count % evenDeterminator != 0){
         count++;
         continue;
       }
       System.out.println(count);
       count++;
     }
+
+    // System.out.println(evenDeterminator); --> außerhalb des Scopes ("Lebensbereich") der Variable
 
     count = 0;
     System.out.println("Do-While Schleife:");

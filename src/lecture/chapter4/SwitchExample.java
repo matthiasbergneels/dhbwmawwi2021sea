@@ -4,7 +4,7 @@ public class SwitchExample {
 
   public static void main(String[] args) {
 
-    int grade = 3;
+    int grade = 2;
 
 
     switch(grade) {

@@ -7,22 +7,47 @@ public class Car {
   protected short hp = 100;
   private String licensePlate = "";
   private int currentSpeed;
-  public final String CAR_BRAND;
+  public final CarBrands CAR_BRAND;
+
+  // öffentliche Konstanten
+  public static final String ALLOWED_COLOR_RED = "RED";
+  public static final String ALLOWED_COLOR_BLUE = "BLUE";
+  public static final String ALLOWED_COLOR_GREEN = "GREEN";
+  public static final String ALLOWED_COLOR_BLACK = "BLACK";
+  public static final String ALLOWED_COLOR_GREY = "GREY";
+
+  public enum CarBrands{
+    Mercedes, Volvo, BMW, Fiat, Skoda, Audi
+  }
+
 
   // Konstruktor(en)
-  public Car(String parameterColor, short parameterHp, String parameterBrand, String parameterLicensePlate){
-    color = parameterColor;
-    hp = parameterHp;
-    CAR_BRAND = parameterBrand;
-    licensePlate = parameterLicensePlate;
 
-    currentSpeed = 0;
+  public Car(){
+    this(Car.ALLOWED_COLOR_BLACK, (short) 150, CarBrands.Fiat, "");
+  }
+
+  public Car(String color, short hp, CarBrands brand, String licensePlate){
+    this.setColor(color);
+    this.hp = hp;
+    this.CAR_BRAND = brand;
+    this.setLicensePlate(licensePlate);
+
+    this.currentSpeed = 0;
+  }
+
+  public Car(String color){
+    this(color, (short) 150, CarBrands.Fiat, "");
+  }
+
+  public Car(short hp){
+    this(Car.ALLOWED_COLOR_BLACK, hp, CarBrands.Fiat, "");
   }
 
   // Methoden
   public void accelerate(int accelerationSpeed){
     if(accelerationSpeed < hp / 10){
-      currentSpeed = currentSpeed + accelerationSpeed;
+      this.currentSpeed = this.currentSpeed + accelerationSpeed;
     } else {
       currentSpeed = currentSpeed + hp / 10;
     }
@@ -63,19 +88,19 @@ public class Car {
     return licensePlate;
   }
 
-  public void setLicensePlate(String parameterLicensePlate){
-    licensePlate = parameterLicensePlate;
+  public void setLicensePlate(String licensePlate){
+    this.licensePlate = licensePlate;
   }
 
-  public void setColor(String parameterColor){
-    if(parameterColor.equals("grey")
-      || parameterColor.equals("black")
-      || parameterColor.equals("green")
-      || parameterColor.equals("red")
-      || parameterColor.equals("blue")){
-      color = parameterColor;
+  public void setColor(String color){
+    if(color.equals(ALLOWED_COLOR_GREY)
+      || color.equals(ALLOWED_COLOR_BLACK)
+      || color.equals(ALLOWED_COLOR_GREEN)
+      || color.equals(ALLOWED_COLOR_RED)
+      || color.equals(ALLOWED_COLOR_BLUE)){
+      this.color = color;
     } else {
-      color = "black";
+      this.color = ALLOWED_COLOR_BLACK;
     }
 
   }

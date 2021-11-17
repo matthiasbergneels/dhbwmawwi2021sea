@@ -2,12 +2,15 @@ package lecture.chapter5;
 
 public class Car {
 
-  // Attribute
+  // Instanz Attribute
   private String color;
   protected short hp = 100;
   private String licensePlate = "";
   private int currentSpeed;
   public final CarBrands CAR_BRAND;
+
+  // Klassen Attribut(e)
+  private static int carCount;
 
   // öffentliche Konstanten
   public static final String ALLOWED_COLOR_RED = "RED";
@@ -23,10 +26,6 @@ public class Car {
 
   // Konstruktor(en)
 
-  public Car(){
-    this(Car.ALLOWED_COLOR_BLACK, (short) 150, CarBrands.Fiat, "");
-  }
-
   public Car(String color, short hp, CarBrands brand, String licensePlate){
     this.setColor(color);
     this.hp = hp;
@@ -34,6 +33,12 @@ public class Car {
     this.setLicensePlate(licensePlate);
 
     this.currentSpeed = 0;
+
+    carCount++;
+  }
+
+  public Car(){
+    this(Car.ALLOWED_COLOR_BLACK, (short) 150, CarBrands.Fiat, "");
   }
 
   public Car(String color){
@@ -103,5 +108,11 @@ public class Car {
       this.color = ALLOWED_COLOR_BLACK;
     }
 
+  }
+
+  // Klassenmethode(n)
+
+  public static int getCarCount(){
+    return carCount;
   }
 }

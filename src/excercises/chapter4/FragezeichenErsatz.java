@@ -15,6 +15,8 @@ public class FragezeichenErsatz {
         // Lösung 2:
         erg = a!=b;
 
+        erg = a > b ^ b > a;
+
         erg = operator(a, b);
 
         /* Nicht erlaubte Lösung (nach Aufgabenstellung)

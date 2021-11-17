@@ -8,6 +8,7 @@ public class Fakultaet {
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Bitte geben Sie eine Zahl ein: ");
         int fakultaet = scanner.nextInt();
         int result = 1;
 

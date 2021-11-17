@@ -30,7 +30,7 @@ public class SiebDesEratosthenes {
         System.out.println("Primzahlen bis " + og);
         for(int i = 2; i < primzahl.length; i++){
             if(primzahl[i]){
-                System.out.println(i);
+                System.out.print(i + " ");
             }
         }
     }

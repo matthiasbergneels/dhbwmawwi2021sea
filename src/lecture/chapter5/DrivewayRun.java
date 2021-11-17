@@ -15,6 +15,16 @@ public class DrivewayRun {
     Car hisCar = new Car((short)900);
     Car herCar = new Car(Car.ALLOWED_COLOR_RED);
 
+    Car[] parkingLot = new Car[5];
+
+    parkingLot[0] = myCar;
+    parkingLot[1] = yourCar;
+    parkingLot[2] = hisCar;
+    parkingLot[3] = herCar;
+
+    parkingLot[0].accelerate(90);
+
+
     System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
 
     myCar.hp = 400;
@@ -56,7 +66,7 @@ public class DrivewayRun {
     System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
 
 
-    hisCar = new Car(Car.ALLOWED_COLOR_BLACK);
+    hisCar = new Car(Car.ALLOWED_COLOR_BLACK); // aber: das Object ist noch über parkingLot[2] erreichbar
     hisCar = null;
 
     System.gc();

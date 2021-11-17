@@ -110,6 +110,11 @@ public class Car {
 
   }
 
+  protected void finalize(){
+    System.out.println("Das " + this.color + " Auto wurde verschrottet!");
+    carCount--;
+  }
+
   // Klassenmethode(n)
 
   public static int getCarCount(){

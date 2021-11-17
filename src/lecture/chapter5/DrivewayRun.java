@@ -6,10 +6,7 @@ public class DrivewayRun {
 
   public static void main(String[] args) {
 
-
     System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
-
-
 
     // Car myCar; deklarieren einer Variable vom Typ "Car" um mit einem Objekt von Car zu interagieren
     // new Car(); erzeugt ein neues (individuelles) Object von der Klasse Car
@@ -57,5 +54,20 @@ public class DrivewayRun {
     System.out.println(yourCar.CAR_BRAND + " fährt aktuell mit " + yourCar.getCurrentSpeed() + " km/h");
 
     System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
+
+
+    hisCar = new Car(Car.ALLOWED_COLOR_BLACK);
+    hisCar = null;
+
+    System.gc();
+
+    try {
+      Thread.sleep(1000);
+    }catch (Exception e){
+      System.out.println("Ups, da ist was schief gegangen");
+    }
+
+    System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
+
   }
 }

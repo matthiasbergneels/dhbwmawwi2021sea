@@ -133,4 +133,13 @@ public class Gueterzug {
     private static Zuglokomotive erzeugeLokomotive() {
         return new Zuglokomotive(1234, "SuperLok", "Elektro", (byte)8);
     }
+
+  @Override
+  public String toString() {
+    return "Gueterzug{" +
+      "nummer=" + nummer +
+      ", laenge=" + laenge +
+      ", anzWagons=" + anzWagons +
+      '}';
+  }
 }

@@ -68,4 +68,14 @@ public class Gueterwagon {
     public void setZug(Gueterzug zug) {
         this.zug = zug;
     }
+
+  @Override
+  public String toString() {
+    return "Gueterwagon{" +
+      "zug=" + zug +
+      ", maxLast=" + maxLast +
+      ", typ='" + typ + '\'' +
+      ", achsen=" + achsen +
+      '}';
+  }
 }

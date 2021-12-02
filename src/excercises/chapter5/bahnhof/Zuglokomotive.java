@@ -46,4 +46,14 @@ public class Zuglokomotive {
     public void setZug(Gueterzug zug) {
         this.zug = zug;
     }
+
+  @Override
+  public String toString() {
+    return "Zuglokomotive{" +
+      "nummer=" + nummer +
+      ", typ='" + typ + '\'' +
+      ", antrieb='" + antrieb + '\'' +
+      ", achsen=" + achsen +
+      '}';
+  }
 }

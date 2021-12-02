@@ -82,5 +82,6 @@ public class AnimalFarmRun {
         System.out.println(currentAnimal.getDescription() + " ist kein Hund!");
       }
     }
+
   }
 }

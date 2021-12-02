@@ -54,4 +54,13 @@ public class Fracht {
         this.volumen = volumen;
     }
 
+  @Override
+  public String toString() {
+    return "Fracht{" +
+      "bezeichnung='" + bezeichnung + '\'' +
+      ", menge=" + menge +
+      ", verpackung='" + verpackung + '\'' +
+      ", volumen=" + volumen +
+      '}';
+  }
 }

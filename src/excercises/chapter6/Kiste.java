@@ -42,5 +42,16 @@ public class Kiste extends Fracht {
         this.setVolumen(this.getHoehe() * this.getBreite() * this.getTiefe());
     }
 
-
+  @Override
+  public String toString() {
+    return "Kiste{" +
+      "bezeichnung='" + bezeichnung + '\'' +
+      ", menge=" + menge +
+      ", verpackung='" + verpackung + '\'' +
+      ", volumen=" + volumen +
+      ", breite=" + breite +
+      ", hoehe=" + hoehe +
+      ", tiefe=" + tiefe +
+      '}';
+  }
 }

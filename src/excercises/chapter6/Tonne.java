@@ -36,4 +36,12 @@ public class Tonne extends Fracht {
         return (this.getHoehe() * this.getRadius() * 2 * Math.PI);
     }
 
+  @Override
+  public String toString() {
+    return "Tonne{" +
+      " " + super.toString() + " " +
+      "hoehe=" + hoehe +
+      ", radius=" + radius +
+      '}';
+  }
 }

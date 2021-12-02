@@ -73,8 +73,7 @@ public class Zugfuehrer {
   @Override
   public String toString() {
     return "Zugfuehrer{" +
-      "zug=" + zug +
-      ", Name='" + Name + '\'' +
+      "Name='" + Name + '\'' +
       ", Vorname='" + Vorname + '\'' +
       ", id=" + id +
       ", gebDate=" + gebDate +

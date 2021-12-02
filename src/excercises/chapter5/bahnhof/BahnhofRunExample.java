@@ -5,7 +5,7 @@ import excercises.chapter6.Kiste;
 import excercises.chapter6.Tonne;
 
 import java.sql.Date;
-import java.util.GregorianCalendar;
+
 
 public class BahnhofRunExample {
 
@@ -47,9 +47,9 @@ public class BahnhofRunExample {
         System.out.println("Gesamt Fracht-Volumen des Güterzuges: " + meinZug.getGesamtFrachtVolumen() + " m^3");
 
         System.out.println("Informationen über meinZug:");
-        System.out.println("Gueterzug: " + meinZug.getAnzWagons() + meinZug.getNummer());
-        System.out.println("Fahrer: " + meinZug.getFahrer().getName() + ", " + meinZug.getFahrer().getVorname() + " (" + meinZug.getFahrer().getGebDate() + ")");
-        System.out.println("Lokomotive: " + meinZug.getLok().getNummer() + ", " + meinZug.getLok().getAntrieb());
+        System.out.println("Gueterzug: " + meinZug);
+        System.out.println("Fahrer: " + meinZug.getFahrer());
+        System.out.println("Lokomotive: " + meinZug.getLok());
 
     }
 }

@@ -16,6 +16,10 @@ public class FamilyRun {
     klaus.setEhefrau(null);
 
 
+    Mann komischerVater = null;
+
+    new Kind(komischerVater, null);
+
 
   }
 }

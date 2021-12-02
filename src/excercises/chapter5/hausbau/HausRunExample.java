@@ -26,6 +26,11 @@ public class HausRunExample {
             haeuser[2] = drittesHaus;
             haeuser[3] = viertesHaus;
 
+            erstesHaus = null;
+            zweitesHaus = null;
+            drittesHaus = null;
+            viertesHaus = null;
+
             System.out.println("Anzahl Häuser: " + Haus.getObjCnt());
 
 
@@ -49,7 +54,7 @@ public class HausRunExample {
             System.gc();
             // Auf GC warten
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch(Exception e){
                 System.out.println("Ausnahmebehandlung für Thread.sleep()");
             }

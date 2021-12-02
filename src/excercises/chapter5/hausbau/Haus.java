@@ -65,10 +65,6 @@ public class Haus {
         this(tueren, 0, 0, 0, null, null, 0, null, false);
     }
 
-    public Haus(String strasse){
-        this(0, 0, 0, 0, strasse, null, 0, null, false);
-    }
-
     public Haus(boolean flachdach){
         this(0, 0, 0, 0, null, null, 0, null, flachdach);
     }
@@ -76,6 +72,10 @@ public class Haus {
     public Haus(String strasse, String hausnummer, int plz, String ort){
         this(0, 0, 0, 0, strasse, hausnummer, plz, ort, false);
     }
+
+  public Haus(String strasse){
+    this(strasse, null, 0, null);
+  }
 
     public Haus(int tueren, int fenster, int etagen, int flaeche, boolean flachdach){
         this(tueren, fenster, etagen, flaeche, null, null, 0, null, flachdach);

@@ -12,4 +12,9 @@ public class Bird extends Animal {
   public void tweet(){
     System.out.println("Der Vogel " + this.getDescription() + " zwitschert");
   }
+
+  @Override
+  public void breath(){
+    System.out.println("Der Vogel " + getDescription() + " atmet!");
+  }
 }

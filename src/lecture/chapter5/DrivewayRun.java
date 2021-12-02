@@ -65,7 +65,6 @@ public class DrivewayRun {
 
     System.out.println("Es gibt " + Car.getCarCount() + " Autos.");
 
-
     hisCar = new Car(Car.ALLOWED_COLOR_BLACK); // aber: das Object ist noch über parkingLot[2] erreichbar
     hisCar = null;
 

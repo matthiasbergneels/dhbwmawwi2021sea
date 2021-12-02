@@ -9,12 +9,14 @@ public class Kind {
     if(vater != null){
       this.vater = vater;
     } else {
+      // TODO: Exception Handling - 2. Semester
       this.vater = new Mann();
     }
 
     if(mutter != null){
       this.mutter = mutter;
     } else {
+      // TODO: Exception Handling - 2. Semester
       this.mutter = new Frau();
     }
 

@@ -115,6 +115,17 @@ public class Car {
     carCount--;
   }
 
+  @Override
+  public String toString() {
+    return "Car{" +
+      "color='" + color + '\'' +
+      ", hp=" + hp +
+      ", licensePlate='" + licensePlate + '\'' +
+      ", currentSpeed=" + currentSpeed +
+      ", CAR_BRAND=" + CAR_BRAND +
+      '}';
+  }
+
   // Klassenmethode(n)
 
   public static int getCarCount(){

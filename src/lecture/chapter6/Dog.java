@@ -1,6 +1,6 @@
 package lecture.chapter6;
 
-public class Dog extends Animal{
+public final class Dog extends Animal{
 
   private String breed;
 
@@ -15,10 +15,24 @@ public class Dog extends Animal{
 
   @Override
   public void eat(){
-    System.out.println("Der Hund " + getDescription() + " frisst");
+    super.eat();
+    System.out.println("Fleisch");
   }
 
+  // Überladene Methode aus Animal (eat())
   public void eat(float amount){
-    System.out.println("Der Hund " + getDescription() + " frisst " + amount + " g Fleisch");
+    this.eat();
+    System.out.println("und zwar " + amount + " Gramm");
+  }
+
+  @Override
+  public void breath(){
+    System.out.println("Der Hund " + getDescription() + " atmet!");
+  }
+
+  @Override
+  public String toString(){
+    return super.toString()
+          + "; Rasse: " + breed;
   }
 }

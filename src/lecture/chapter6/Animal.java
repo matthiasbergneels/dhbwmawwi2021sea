@@ -1,20 +1,21 @@
 package lecture.chapter6;
 
-public class Animal {
+public abstract class Animal {
 
   private float size;
   private float weight;
-  private String description;
+  private final String description;
 
   // Konstruktor
   public Animal(float size, float weight, String description){
-    setDescription(description);
+    //setDescription(description);
+    this.description = description;
     setSize(size);
     setWeight(weight);
   }
 
   // Verhaltensmethoden
-  public void move(){
+  public final void move(){
     System.out.println("Das Tier " + description + " bewegt sich");
   }
 
@@ -22,9 +23,7 @@ public class Animal {
     System.out.println("Das Tier " + description + " frisst ");
   }
 
-  public void breath(){
-    System.out.println("Das Tier " + description + " atmet");
-  }
+  public abstract void breath();
 
   // Setter- / Getter-Methoden
   public float getSize() {
@@ -47,7 +46,11 @@ public class Animal {
     return description;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+
+  @Override
+  public String toString(){
+    return super.toString() + " - Beschreibung: " + getDescription()
+      + "; Größe: " + getSize()
+      + "; Gewicht: " + getWeight();
   }
 }

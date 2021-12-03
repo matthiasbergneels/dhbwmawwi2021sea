@@ -56,6 +56,9 @@ public class AnimalFarmRun {
 
     System.out.println(anyObject);
 
+    System.out.println("Ist das Objekt ein Tier (Animal): " + (anyObject instanceof Animal));
+    System.out.println("Ist das Objekt ein Objekt: " + (anyObject instanceof Object));
+    System.out.println("Ist das Objekt ein Vogel (Bird): " + (anyObject instanceof Bird));
 
 
     Animal[] shelter = new Animal[5];

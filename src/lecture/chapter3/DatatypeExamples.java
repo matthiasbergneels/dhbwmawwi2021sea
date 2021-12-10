@@ -119,9 +119,7 @@ public class DatatypeExamples {
     System.out.println(numberA + 1);
 
 
-    var numberC = '1';     // typ int
+    var numberC = '1';                // typ char
     var newSign = thirdSign;    // typ char
-
-
   }
 }

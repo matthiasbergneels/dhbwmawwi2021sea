@@ -8,10 +8,10 @@ public interface Bookable {
   // default Implementierung für Interface Methoden um das Interface abwärtskompatibel zu halten
   public default boolean reserveSlots(int slots){
     return false;
-  };
+  }
 
   public default boolean prioritySlotBooking(int slots){
     return false;
-  };
+  }
 
 }

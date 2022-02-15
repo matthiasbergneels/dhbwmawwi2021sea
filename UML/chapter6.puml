@@ -1,0 +1,39 @@
+@startuml
+class lecture.chapter6.Dog {
+- String breed
++ <<Create>> Dog(float,float,String,String)
++ void bark()
++ void eat()
++ void eat(float)
++ void breath()
++ String toString()
+}
+abstract class lecture.chapter6.Animal {
+- float size
+- float weight
+- String description
++ <<Create>> Animal(float,float,String)
++ void move()
++ void eat()
++ {abstract}void breath()
++ float getSize()
++ void setSize(float)
++ float getWeight()
++ void setWeight(float)
++ String getDescription()
++ String toString()
+}
+class lecture.chapter6.AnimalFarmRun {
++ {static} void main(String[])
+}
+class lecture.chapter6.Bird {
+- boolean canFly
++ <<Create>> Bird(float,float,String,boolean)
++ void tweet()
++ void breath()
+}
+
+
+lecture.chapter6.Animal <|-- lecture.chapter6.Dog
+lecture.chapter6.Animal <|-- lecture.chapter6.Bird
+@enduml

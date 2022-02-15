@@ -1,0 +1,87 @@
+@startuml
+class lecture.chapter5.DrivewayRun {
++ {static} void main(String[])
+}
+
+class lecture.chapter5.familie.Kind {
+- Mann vater
+- Frau mutter
+~ <<Create>> Kind(Mann,Frau)
+}
+class lecture.chapter5.familie.Mann {
+- Frau ehefrau
+- Kind[] kinder
++ <<Create>> Mann()
++ Frau getEhefrau()
++ void setEhefrau(Frau)
+}
+class lecture.chapter5.CallByExamples {
++ {static} void main(String[])
+}
+class lecture.chapter5.BarRun {
++ {static} void main(String[])
+}
+class lecture.chapter5.familie.FamilyRun {
++ {static} void main(String[])
+}
+class lecture.chapter5.Student {
+- int studentId
+- String name
++ <<Create>> Student(int,String)
++ int getStudentId()
++ String getName()
++ void setName(String)
++ void drink(float)
++ void drink(float,float)
++ void drink(float,boolean)
+}
+class lecture.chapter5.Car {
+- String color
+# short hp
+- String licensePlate
+- int currentSpeed
++ CarBrands CAR_BRAND
+- {static} int carCount
++ {static} String ALLOWED_COLOR_RED
++ {static} String ALLOWED_COLOR_BLUE
++ {static} String ALLOWED_COLOR_GREEN
++ {static} String ALLOWED_COLOR_BLACK
++ {static} String ALLOWED_COLOR_GREY
++ <<Create>> Car(String,short,CarBrands,String)
++ <<Create>> Car()
++ <<Create>> Car(String)
++ <<Create>> Car(short)
++ void accelerate(int)
++ void brake()
++ void fullBrake()
++ int getCurrentSpeed()
++ String getColor()
++ short getHp()
++ String getLicensePlate()
++ void setLicensePlate(String)
++ void setColor(String)
+# void finalize()
++ String toString()
++ {static} int getCarCount()
+}
+class lecture.chapter5.familie.Frau {
+- Mann ehemann
+- Kind[] kinder
++ <<Create>> Frau()
++ Mann getEhemann()
++ void setEhemann(Mann)
+}
+class lecture.chapter5.Person {
+- boolean hasBlueEye
++ void hitInFace()
++ boolean hasBlueEye()
+}
+
+lecture.chapter5.familie.Mann "0..1" -- "0..1" lecture.chapter5.familie.Frau : ist verheiratet mit
+lecture.chapter5.familie.Mann "0..n" -- "0..m" lecture.chapter5.familie.Frau : hat Affaire mit
+
+lecture.chapter5.familie.Mann "1" -- "0..n" lecture.chapter5.familie.Kind : Elternteil von
+lecture.chapter5.familie.Frau "1" -- "0..n" lecture.chapter5.familie.Kind : Elternteil von
+
+
+@enduml

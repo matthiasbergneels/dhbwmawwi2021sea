@@ -2,7 +2,13 @@ package lecture.excursion.junit;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.time.Duration;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,13 +19,11 @@ class CalculatorTest {
 
   @BeforeEach
   void setUp() {
-    System.out.println("Läuft vor jedem Test");
     testCalculator = new Calculator();
   }
 
   @AfterEach
   void tearDown() {
-    System.out.println("Läuft nach jedem Test");
     testCalculator = null;
   }
 
@@ -29,7 +33,6 @@ class CalculatorTest {
     @Test
     @DisplayName("adding two numbers")
     void add() {
-      System.out.println("testen der add Methode");
       double result = testCalculator.add(10.0, 10.0);
 
       assertEquals(20.0, result);
@@ -38,7 +41,6 @@ class CalculatorTest {
     @Test
     @DisplayName("adding two integer numbers")
     void addTestWithInteger() {
-      System.out.println("testen der add Methode");
       double result = testCalculator.add(10, 10);
 
       assertEquals(20.0, result);
@@ -47,7 +49,6 @@ class CalculatorTest {
     @Test
     @DisplayName("adding numbers as negativ test")
     void addWithNegativTest() {
-      System.out.println("testen der add Methode");
       double result = testCalculator.add(10, 10);
 
       assertNotEquals(99.0, result);
@@ -56,7 +57,6 @@ class CalculatorTest {
     @Test
     @DisplayName("adding two large numbers")
     void addWithLargeNumbers() {
-      System.out.println("testen der add Methode");
       double result = testCalculator.add(50000000000000000.0, 10.0);
 
       assertEquals(50000000000000010.0, result);
@@ -66,7 +66,6 @@ class CalculatorTest {
   @Test
   @DisplayName("subtract two numbers")
   void subtract() {
-    System.out.println("testen der subtract Methode");
     double result = testCalculator.subtract(10.0, 10.0);
 
     assertEquals(0.0, result);
@@ -93,4 +92,47 @@ class CalculatorTest {
 
     assertEquals(25.0, result);
   }
+
+  @Nested
+  @DisplayName("Multipiply Test Cases")
+  class MultiplyTestCases {
+
+    @ParameterizedTest(name = "{0} multiplied {1} should be {2}")
+    @DisplayName("Multiply Test")
+    @CsvSource({
+      "10.0, 10.0, 100.0",
+      "5.0, 10.0, 50.0",
+      "10.0, 0.0, 0.0"
+    })
+    void multiply(double numberA, double numberB, double expectedResult) {
+      assertEquals(expectedResult, testCalculator.multiply(numberA, numberB));
+    }
+
+    @ParameterizedTest(name = "{0} multiplied {1} should be {2}")
+    @DisplayName("Multiply Test from MethodSource")
+    @MethodSource("lecture.excursion.junit.CalculatorTest#provideMultiplyTestCases")
+    void multiplyWithDataFromMethod(double numberA, double numberB, double expectedResult) {
+      assertEquals(expectedResult, testCalculator.multiply(numberA, numberB));
+    }
+  }
+
+  @Test
+  @DisplayName("Divide by 0 exception test")
+  void subtractWithException(){
+    ArithmeticException resultException = assertThrows(ArithmeticException.class, () -> {
+      testCalculator.divide(100.0, 0.0);
+    });
+
+    assertEquals("Division by 0 not allowed", resultException.getMessage());
+  }
+
+
+  static Stream provideMultiplyTestCases(){
+    return Stream.of(
+      Arguments.of(10.0, 10.0, 100.0),
+      Arguments.of(5.0, 4.0, 20.0)
+      // ... additional Test cases
+    );
+  }
+
 }

@@ -7,8 +7,6 @@ public class TravelAgencyRun {
 
   public static void main(String[] args) {
 
-
-
     Bookable[] bookableEntities = new Bookable[5];
 
     // Narrowing Cast --> Sichtbarkeit auf "Fähigkeiten" von Bookable eingeschränkt

@@ -1,5 +1,7 @@
 package lecture.chapter7;
 
+import lecture.chapter8.NotEnoughFreeSlotsException;
+
 public class Hotel implements Bookable{
 
   private final int roomCount;
@@ -15,14 +17,13 @@ public class Hotel implements Bookable{
   }
 
   @Override
-  public boolean bookSlots(int slots){
+  public void bookSlots(int slots) throws NotEnoughFreeSlotsException {
 
-    if(freeSlots() >= slots){
-      bookedRoomCount = bookedRoomCount + slots;
-      return true;
+    if(freeSlots() < slots){
+      throw new NotEnoughFreeSlotsException(slots, freeSlots());
     }
 
-    return false;
+    bookedRoomCount = bookedRoomCount + slots;
   }
 
   @Override

@@ -1,6 +1,6 @@
 package lecture.chapter7;
 
-import java.util.TreeSet;
+import lecture.chapter8.NotEnoughFreeSlotsException;
 
 public class Plane extends Object implements Bookable, Comparable, Cloneable{
 
@@ -15,22 +15,25 @@ public class Plane extends Object implements Bookable, Comparable, Cloneable{
   }
 
   @Override
-  public boolean bookSlots(int slots) {
+  public void bookSlots(int slots) throws NotEnoughFreeSlotsException {
 
-    if(freeSlots() >= slots){
-      for(int i = 0; i < seats.length; i++){
+    if(freeSlots() < slots) {
+      NotEnoughFreeSlotsException missingSlots = new NotEnoughFreeSlotsException(slots, freeSlots());
+
+      throw missingSlots;
+    }
+
+    for(int i = 0; i < seats.length; i++){
         if(!seats[i]){
           seats[i] = true;
           slots--;
         }
 
         if(slots == 0){
-          return true;
+          return;
         }
       }
-    }
 
-    return false;
   }
 
   @Override

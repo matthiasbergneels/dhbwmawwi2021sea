@@ -20,6 +20,10 @@ public class Hotel implements Bookable{
   @Override
   public void bookSlots(int slots) throws NotEnoughFreeSlotsException, BookableEntityIsBurnedDownException {
 
+    if(slots > 100) {
+      throw new BookableEntityIsBurnedDownException();
+    }
+
     if(freeSlots() < slots){
       throw new NotEnoughFreeSlotsException(slots, freeSlots());
     }

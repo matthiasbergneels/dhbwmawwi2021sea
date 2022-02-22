@@ -1,5 +1,6 @@
 package lecture.chapter7;
 
+import lecture.chapter8.BookableEntityIsBurnedDownException;
 import lecture.chapter8.NotEnoughFreeSlotsException;
 
 public class Plane extends Object implements Bookable, Comparable, Cloneable{
@@ -15,7 +16,7 @@ public class Plane extends Object implements Bookable, Comparable, Cloneable{
   }
 
   @Override
-  public void bookSlots(int slots) throws NotEnoughFreeSlotsException {
+  public void bookSlots(int slots) throws NotEnoughFreeSlotsException, BookableEntityIsBurnedDownException {
 
     if(freeSlots() < slots) {
       NotEnoughFreeSlotsException missingSlots = new NotEnoughFreeSlotsException(slots, freeSlots());

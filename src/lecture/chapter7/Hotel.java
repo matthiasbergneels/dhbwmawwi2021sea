@@ -1,5 +1,6 @@
 package lecture.chapter7;
 
+import lecture.chapter8.BookableEntityIsBurnedDownException;
 import lecture.chapter8.NotEnoughFreeSlotsException;
 
 public class Hotel implements Bookable{
@@ -17,7 +18,7 @@ public class Hotel implements Bookable{
   }
 
   @Override
-  public void bookSlots(int slots) throws NotEnoughFreeSlotsException {
+  public void bookSlots(int slots) throws NotEnoughFreeSlotsException, BookableEntityIsBurnedDownException {
 
     if(freeSlots() < slots){
       throw new NotEnoughFreeSlotsException(slots, freeSlots());

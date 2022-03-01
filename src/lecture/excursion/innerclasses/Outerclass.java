@@ -6,6 +6,10 @@ public class Outerclass {
     void print(String message);
   }
 
+  public static interface SecondInnerInterface{
+    void print();
+  }
+
   // inner top-level class
   public static class InnerTopLevelClass{
     void print(String message){
@@ -45,6 +49,21 @@ public class Outerclass {
     myInnerAnonymousClass.print(message);
   }
 
+  void printFromLambdaFunction(String message){
+
+    InnerInterface myLambdaFunction = (String lambdaMessage) -> {
+      System.out.println(this.getClass().getName() + " - Lambda Funktion sagt: " + lambdaMessage);
+    };
+
+    myLambdaFunction.print(message);
+  }
+
+  void printFromShortenedLambdaFunction(String message){
+
+    SecondInnerInterface myLambdaFunction = () -> System.out.println(this.getClass().getName() + " - Lambda Funktion sagt: " + message);
+
+    myLambdaFunction.print();
+  }
 
 
 
@@ -63,6 +82,8 @@ public class Outerclass {
     myOutclass.printFromInnerLocalClass(message);
 
     myOutclass.printFromInnerAnonymousClass(message);
+
+    myOutclass.printFromLambdaFunction(message);
 
 
   }

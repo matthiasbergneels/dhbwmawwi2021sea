@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class TravelAgencyRun {
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
 
     Bookable[] bookableEntities = new Bookable[5];
 

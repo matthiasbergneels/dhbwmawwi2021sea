@@ -1,5 +1,8 @@
 package lecture.chapter9;
 
+import lecture.chapter5.Car;
+import lecture.chapter5.Student;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +11,9 @@ public class ListExample {
 
   public static void main(String[] args) {
 
-    List myNameList = new ArrayList();
+    List<String> myNameList = new ArrayList<String>();
+
+    List<Student> myStudentList = new ArrayList<Student>();
 
     myNameList.add("Klaus");
     myNameList.add("Fritz");
@@ -16,6 +21,8 @@ public class ListExample {
     myNameList.add("Klaus");
     myNameList.add("Gabi");
     myNameList.add("Frida");
+    //myNameList.add(new Student(4711, "Michael"));  // --> nicht möglich, wegen Typisierung mit Generic
+    //myNameList.add(new Car()); // --> nicht möglich, wegen Typisierung mit Generic
 
     System.out.println("Name Index 2: " + myNameList.get(2));
     System.out.println("Enthält Fritz? " + myNameList.contains("Fritz"));
@@ -36,6 +43,27 @@ public class ListExample {
     for(int i = 0; i < myNameList.size(); i++){
       System.out.println(myNameList.get(i));
     }
+
+    // Sequentielle Zugriffe auf Listen
+
+    System.out.println("Sequentieller Zugriff über for-each:");
+    for(String myName : myNameList){
+      System.out.println(myName);
+    }
+
+    System.out.println("Einfache Datentypen in Containern");
+
+    List<Integer> numbers = new ArrayList<Integer>();
+
+    numbers.add(42);                  // <-- Auto-Boxing von "int" zu "Integer"
+    numbers.add(new Integer(42));
+    numbers.add(Integer.valueOf(42));
+    //numbers.add(3.14);
+
+    Integer myIntObject = numbers.get(0);
+
+    int myNumber = numbers.get(0);  // <-- Auto-Unboxing von "Integer" zu "int"
+
 
 
   }

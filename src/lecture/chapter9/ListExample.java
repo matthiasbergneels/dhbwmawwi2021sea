@@ -4,6 +4,7 @@ import lecture.chapter5.Car;
 import lecture.chapter5.Student;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ListExample {
@@ -49,7 +50,29 @@ public class ListExample {
     System.out.println("Sequentieller Zugriff über for-each:");
     for(String myName : myNameList){
       System.out.println(myName);
+
+      /* --> "externe" modification wärend der Iteration ist nicht erlaubt
+      if(myName.equals("Klaus")){
+        myNameList.remove("Klaus");
+      }
+
+       */
     }
+
+    System.out.println("Sequentieller Zugriff über Iterator:");
+
+    Iterator<String> i = myNameList.iterator();
+    while(i.hasNext()){
+      String name = i.next();
+      if(name.equals("Klaus") || name.equals("Frida")){
+        i.remove();
+        // myNameList.add("Franz"); --> "externe" modification wärend der Iteration ist nicht erlaubt
+      }
+      System.out.println("Aktueller Name: " + name);
+    }
+
+    System.out.println("Anzahl Namen: " + myNameList.size());
+
 
     System.out.println("Einfache Datentypen in Containern");
 

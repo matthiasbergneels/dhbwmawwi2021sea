@@ -10,6 +10,14 @@ public class FullName implements Comparable<FullName> {
     this.familyName = familyName;
   }
 
+  public String getName(){
+    return name;
+  }
+
+  public String getFamilyName(){
+    return familyName;
+  }
+
   @Override
   public String toString() {
     return familyName + ", " + name;

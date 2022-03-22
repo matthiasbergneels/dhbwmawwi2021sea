@@ -4,6 +4,7 @@ import lecture.chapter5.Car;
 import lecture.chapter5.Student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -88,6 +89,42 @@ public class ListExample {
     int myNumber = numbers.get(0);  // <-- Auto-Unboxing von "Integer" zu "int"
 
 
+
+
+    List<FullName> fullNameList = new ArrayList<>();
+
+    fullNameList.add(new FullName("Klaus", "Müller"));
+    fullNameList.add(new FullName("Gabi", "Schmidt"));
+    fullNameList.add(new FullName("Gisela", "Friedhelm"));
+    fullNameList.add(new FullName("Klaus", "Müller"));
+
+    System.out.println("FullName List Ausgabe:");
+    for(FullName currentFullName : fullNameList){
+      System.out.println(currentFullName);
+    }
+
+    System.out.println("FullName List Ausgabe - sortiert nach Länge:");
+    fullNameList.sort(new SortFullNameBySignCount());
+
+    for(FullName currentFullName : fullNameList){
+      System.out.println(currentFullName);
+    }
+
+
+    System.out.println("FullName List Ausgabe - sortiert natürlicher Ordnung:");
+    Collections.sort(fullNameList); // FullName MUSS Comparable implementieren --> natürliche Ordnung
+
+    for(FullName currentFullName : fullNameList){
+      System.out.println(currentFullName);
+    }
+
+
+    System.out.println("FullName List Ausgabe - sortiert nach Länge:");
+    Collections.sort(fullNameList, new SortFullNameBySignCount());
+
+    for(FullName currentFullName : fullNameList){
+      System.out.println(currentFullName);
+    }
 
   }
 }

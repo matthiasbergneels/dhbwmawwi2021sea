@@ -72,5 +72,16 @@ public class SetExample {
       System.out.println(currentName);
     }
 
+
+    Set<FullName> fullNamesSortedByLength = new TreeSet<>(new SortFullNameBySignCount());
+
+    fullNamesSortedByLength.addAll(setOfFullNames);
+
+    System.out.println("Sortiert nach der Länge der Namen:");
+    for(FullName currentName : fullNamesSortedByLength){
+      System.out.println(currentName);
+    }
+
+
   }
 }

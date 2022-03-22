@@ -61,4 +61,17 @@ public class FullName implements Comparable<FullName> {
     return true;
   }
 
+  @Override
+  public int hashCode(){
+    return familyName.hashCode() + name.hashCode();
+  }
+
+  /*
+  @Override
+  public int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (familyName != null ? familyName.hashCode() : 0);
+    return result;
+  }
+   */
 }

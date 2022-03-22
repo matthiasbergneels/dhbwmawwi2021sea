@@ -89,8 +89,6 @@ public class ListExample {
     int myNumber = numbers.get(0);  // <-- Auto-Unboxing von "Integer" zu "int"
 
 
-
-
     List<FullName> fullNameList = new ArrayList<>();
 
     fullNameList.add(new FullName("Klaus", "Müller"));
@@ -126,5 +124,15 @@ public class ListExample {
       System.out.println(currentFullName);
     }
 
+    System.out.println("FullName List Ausgabe - sortiert nach Differenz der Länge von Vor- und Nachname: ");
+    Collections.sort(fullNameList, (firstFullName, secondFullName) -> {
+      int signCountDifferenceFirstFullName = firstFullName.getFamilyName().length() - firstFullName.getName().length();
+      int signCountDifferenceSecondFullName = secondFullName.getFamilyName().length() - secondFullName.getName().length();
+      return signCountDifferenceFirstFullName - signCountDifferenceSecondFullName;
+    });
+
+    for(FullName currentFullName : fullNameList){
+      System.out.println(currentFullName);
+    }
   }
 }

@@ -1,10 +1,7 @@
 package lecture.chapter10;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.text.ParseException;
 
 import javax.swing.*;
@@ -17,7 +14,7 @@ public class Logon extends JFrame {
   private static final String ACTION_COMMAND_PRINT = "PRINT";
   private static final String ACTION_COMMAND_CLOSE = "CLOSE";
 
-  public Logon() throws ParseException {
+  public Logon(int x, int y) throws ParseException {
     this.setTitle("Logon");
 
     final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
@@ -132,6 +129,38 @@ public class Logon extends JFrame {
     southPanel.add(okButton);
     southPanel.add(cancelButton);
 
+
+    MouseListener buttonMouseListener = new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        System.out.println("Entered Button with Mouse");
+        ((JButton)e.getSource()).setEnabled(false);
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+        System.out.println("Exited Button with Mouse");
+        ((JButton)e.getSource()).setEnabled(true);
+      }
+    };
+
+    cancelButton.addMouseListener(buttonMouseListener);
+
     // create & assign Borders
     Border etchedBorder = BorderFactory.createEtchedBorder();
     Border connectionBorder = BorderFactory.createTitledBorder(etchedBorder, "Verbindung");
@@ -153,11 +182,32 @@ public class Logon extends JFrame {
 
     // set JFrame behavior
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.pack();
+    this.setBounds(x, y, 500, 500);
+    // this.pack();
     this.setVisible(true);
   }
 
   public static void main(String[] args) throws ParseException {
-    new Logon();
+
+    GraphicsDevice defaultGraphicDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+    System.out.println("Screen Dimensions: "
+          + defaultGraphicDevice.getDefaultConfiguration().getBounds());
+
+    GraphicsEnvironment virtualGraphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+    GraphicsDevice[] screens = virtualGraphicEnvironment.getScreenDevices();
+
+    int x = 0;
+    int y = 0;
+    for(GraphicsDevice screen : screens){
+      System.out.println(screen.getDefaultConfiguration().getBounds());
+      x = screen.getDefaultConfiguration().getBounds().x;
+      y = screen.getDefaultConfiguration().getBounds().y;
+    }
+
+
+
+    new Logon(x, y);
   }
 }

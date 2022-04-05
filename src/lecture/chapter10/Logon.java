@@ -1,6 +1,8 @@
 package lecture.chapter10;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
@@ -11,6 +13,9 @@ import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 public class Logon extends JFrame {
+
+  private static final String ACTION_COMMAND_PRINT = "PRINT";
+  private static final String ACTION_COMMAND_CLOSE = "CLOSE";
 
   public Logon() throws ParseException {
     this.setTitle("Logon");
@@ -39,7 +44,6 @@ public class Logon extends JFrame {
           } else {
             portField.setText("");
           }
-
         }
       }
     });
@@ -105,8 +109,25 @@ public class Logon extends JFrame {
     filePanel.add(flowLayoutForCell);
 
     // create & assign Buttons
-    JButton okButton = new JButton("Ausgeben");
+    JButton okButton = new JButton("Ok");
+    okButton.setActionCommand(ACTION_COMMAND_PRINT);
     JButton cancelButton = new JButton("Schliessen");
+    cancelButton.setActionCommand(ACTION_COMMAND_CLOSE);
+
+    ActionListener myButtonListener = (ActionEvent e) -> {
+      System.out.println("ActionEvent - ParameterString: " + e.paramString());
+      System.out.println("ActionEvent - ActionCommand: " + e.getActionCommand());
+      System.out.println("ActionEvent - Modifiers: " + e.getModifiers());
+
+      if(e.getActionCommand().equals(ACTION_COMMAND_PRINT)){
+        System.out.println("Art: " + myComboBox.getSelectedItem() + ", Port: " + portField.getText());
+      } else if(e.getActionCommand().equals(ACTION_COMMAND_CLOSE)){
+        System.exit(0);
+      }
+    };
+
+    okButton.addActionListener(myButtonListener);
+    cancelButton.addActionListener(myButtonListener);
 
     southPanel.add(okButton);
     southPanel.add(cancelButton);

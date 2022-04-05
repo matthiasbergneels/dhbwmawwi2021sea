@@ -18,6 +18,7 @@ public class MyFristUI {
     myFirstUi.add(breakButton);
 
     //myFirstUi.setSize(300, 200);
+    //myFirstUi.setBounds(100, 100, 200, 300);
     myFirstUi.pack();
     myFirstUi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myFirstUi.setVisible(true);

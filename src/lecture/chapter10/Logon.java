@@ -1,6 +1,8 @@
 package lecture.chapter10;
 
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 
 import javax.swing.*;
@@ -8,9 +10,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
-public class Logon extends JFrame{
+public class Logon extends JFrame {
 
-  public Logon() throws ParseException{
+  public Logon() throws ParseException {
     this.setTitle("Logon");
 
     final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
@@ -18,6 +20,29 @@ public class Logon extends JFrame{
 
     JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setColumns(3);
+
+    myComboBox.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+
+        if(e.getStateChange() == ItemEvent.SELECTED) {
+          System.out.println("myComboBox ausgewählt");
+
+          System.out.println("ItemEvent - Item: " + e.getItem());
+          System.out.println("ItemEvent - ParameterString: " + e.paramString());
+          System.out.println("ItemEvent - StateChange: " + e.getStateChange());
+
+          if(e.getItem().equals("FTP")){
+            portField.setText("21");
+          } else if(e.getItem().equals("HTTP")){
+            portField.setText("80");
+          } else {
+            portField.setText("");
+          }
+
+        }
+      }
+    });
 
     // initialize Panels
     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -59,9 +84,11 @@ public class Logon extends JFrame{
     flowLayoutForCell = new JPanel(cellFlowLayout);
     flowLayoutForCell.add(new JLabel("Port:"));
     connectionPanel.add(flowLayoutForCell);
-    flowLayoutForCell = new JPanel(cellFlowLayout);
-    flowLayoutForCell.add(portField);
-    connectionPanel.add(flowLayoutForCell);
+
+    //flowLayoutForCell = new JPanel(cellFlowLayout);
+    //flowLayoutForCell.add(portField);
+    //connectionPanel.add(flowLayoutForCell);
+    connectionPanel.add(portField);
 
     // create & add Fields for File Area
     flowLayoutForCell = new JPanel(cellFlowLayout);
@@ -111,5 +138,5 @@ public class Logon extends JFrame{
 
   public static void main(String[] args) throws ParseException {
     new Logon();
-    }
+  }
 }

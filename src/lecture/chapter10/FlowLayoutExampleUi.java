@@ -1,7 +1,7 @@
 package lecture.chapter10;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.FlowLayout;
 
 public class FlowLayoutExampleUi extends JFrame {
 

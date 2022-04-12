@@ -151,18 +151,24 @@ public class Logon extends JFrame {
 
       @Override
       public void mouseEntered(MouseEvent e) {
-        System.out.println("Entered Button with Mouse");
-        ((JButton)e.getSource()).setEnabled(false);
+        System.out.println("Entered Componente with Mouse");
+        if(e.getSource() instanceof JButton){
+          ((JButton)e.getSource()).setEnabled(false);
+        }
+
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-        System.out.println("Exited Button with Mouse");
-        ((JButton)e.getSource()).setEnabled(true);
+        System.out.println("Exited Componente with Mouse");
+        if(e.getSource() instanceof JButton) {
+          ((JButton) e.getSource()).setEnabled(true);
+        }
       }
     };
 
     cancelButton.addMouseListener(buttonMouseListener);
+    this.addMouseListener(buttonMouseListener);
 
     // create & assign Borders
     Border etchedBorder = BorderFactory.createEtchedBorder();
@@ -281,7 +287,7 @@ public class Logon extends JFrame {
     MonitorDescriptor(GraphicsDevice screen, int index) {
       this.screen = screen;
       this.label = "Monitor " + (index+1) + " ("+screen.getDisplayMode()+")";
-      this.locationPoint = new Point(screen.getDefaultConfiguration().getBounds().x, screen.getDefaultConfiguration().getBounds().y);
+      this.locationPoint = new Point(screen.getDefaultConfiguration().getBounds().x + (screen.getDefaultConfiguration().getBounds().width / 2), screen.getDefaultConfiguration().getBounds().y+100);
       this.actionCommand = ACTION_COMMAND_MONITOR_PREFIX + index;
     }
 

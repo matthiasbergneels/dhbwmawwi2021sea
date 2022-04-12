@@ -1,8 +1,8 @@
 package lecture.chapter11;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Set;
 
@@ -75,7 +75,7 @@ public class FileSystemAccess {
       System.out.println(myDirectory.getName() + " - existiert: " + myDirectory.exists());
       System.out.println(myRenamedDirectory.getName() + " - existiert: " + myRenamedDirectory.exists());
     } else {
-      // myDirectory löschen
+      myDirectory.delete();
     }
 
     File myFile = new File(myRenamedDirectory.getPath() + File.separator + "myFile.txt");
@@ -100,8 +100,89 @@ public class FileSystemAccess {
         myFile.renameTo(myRenamedFile);
         System.out.println(myFile.getName() + " - existiert: " + myFile.exists());
         System.out.println(myRenamedFile.getName() + " - existiert: " + myRenamedFile.exists());
+    }else {
+      myFile.delete();
     }
 
+
+    System.out.println("Einlesen von Daten über System.in (Bytes)");
+    System.out.println("=====================================");
+
+    System.out.println("Geben Sie einen Text ein:");
+
+    byte[] input = new byte[255];
+
+    try{
+      System.in.read(input, 0, 255);
+    }catch(IOException e){
+      System.out.println("Fehler bei der Eingabe " + e.getMessage());
+    }
+
+    System.out.println(input);
+    System.out.println(new String(input));
+
+    System.out.println("Einlesen von Daten über System.in (Char)");
+    System.out.println("=====================================");
+
+    InputStreamReader systemInReader = new InputStreamReader(System.in);
+    BufferedReader systemInBufferedReader = new BufferedReader(systemInReader);
+
+    String inputString = "";
+    ArrayList<String> inputTextLines = new ArrayList<>();
+
+    System.out.println("Bitte geben Sie einen Text ein (Beenden mit exit):");
+
+    while(true){
+      try{
+        inputString = systemInBufferedReader.readLine();
+        if(inputString.equals("exit")){
+          break;
+        }
+        System.out.println(inputString);
+        inputTextLines.add(inputString);
+      } catch(IOException e){
+        System.out.println("Fehler bei der Eingabe " + e.getMessage());
+      }
+    }
+
+    System.out.println("Vollständiger Text:");
+    for(String line : inputTextLines){
+      System.out.println(line);
+    }
+
+    FileWriter myTextFileWriter = null;
+
+    try {
+      myTextFileWriter = new FileWriter(myRenamedFile);
+
+      for(String line : inputTextLines){
+        myTextFileWriter.write(line + "\n");
+      }
+    }catch (IOException e){
+      System.out.println("Fehler beim schreiben der Datei " + e.getMessage());
+    } finally {
+      try {
+        myTextFileWriter.close();
+      }catch(IOException e){
+        System.out.println("Fehler beim schliessen der Datei " + e.getMessage());
+      }
+    }
+
+    System.out.println("Auslesen aus Datei");
+    System.out.println("=====================================");
+
+    try(FileReader myTextFileReader = new FileReader(myRenamedFile);
+        BufferedReader myTextFileBufferedReader = new BufferedReader(myTextFileReader)){
+
+      String line;
+
+      while((line = myTextFileBufferedReader.readLine()) != null){
+        System.out.println(line);
+      }
+
+    }catch(IOException e){
+      System.out.println("Fehler beim auslesen der Datei " + e.getMessage());
+    }
   }
 
   private static void listDirectoryAndContent(File currentDirectory, int indentation){

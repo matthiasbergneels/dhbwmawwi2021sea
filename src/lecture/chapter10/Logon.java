@@ -13,8 +13,11 @@ public class Logon extends JFrame {
 
   private static final String ACTION_COMMAND_PRINT = "PRINT";
   private static final String ACTION_COMMAND_CLOSE = "CLOSE";
+  private static final String ACTION_COMMAND_MAXIMIZE_WINDOW = "COMMAND_MAXIMIZE_WINDOW";
+  private static final String ACTION_COMMAND_PACK_WINDOW = "COMMAND_PACK_WINDOW";
+  private static final String ACTION_COMMAND_MONITOR_PREFIX = "MONITOR_";
 
-  public Logon(int x, int y) throws ParseException {
+  public Logon() throws ParseException {
     this.setTitle("Logon");
 
     final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
@@ -180,34 +183,118 @@ public class Logon extends JFrame {
 
     this.add(mainPanel);
 
+    JMenuBar myMenuBar = new JMenuBar();
+
+    JMenu fileMenu = new JMenu("Datei");
+
+    JMenuItem closeMenuItem = new JMenuItem("Beenden");
+    closeMenuItem.setActionCommand(ACTION_COMMAND_CLOSE);
+    closeMenuItem.addActionListener(myButtonListener);
+
+
+    fileMenu.add(closeMenuItem);
+    myMenuBar.add(fileMenu);
+
+    myMenuBar.add(generateWindowSetupMenu());
+    this.setJMenuBar(myMenuBar);
+
     // set JFrame behavior
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.setBounds(x, y, 500, 500);
-    // this.pack();
+    this.pack();
     this.setVisible(true);
   }
 
   public static void main(String[] args) throws ParseException {
+    GraphicsDevice defaultScreenDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
-    GraphicsDevice defaultGraphicDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    System.out.println(String.format("Screen Dimension: %.0f x %.0f",
+      defaultScreenDevice.getDefaultConfiguration().getBounds().getWidth(),
+      defaultScreenDevice.getDefaultConfiguration().getBounds().getHeight()));
 
-    System.out.println("Screen Dimensions: "
-          + defaultGraphicDevice.getDefaultConfiguration().getBounds());
+    new Logon();
 
-    GraphicsEnvironment virtualGraphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-    GraphicsDevice[] screens = virtualGraphicEnvironment.getScreenDevices();
+    GraphicsEnvironment virtualGraphicsEvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsDevice[] screens = virtualGraphicsEvironment.getScreenDevices();
 
-    int x = 0;
-    int y = 0;
     for(GraphicsDevice screen : screens){
+      System.out.println(screen);
+      System.out.println(screen.getDefaultConfiguration());
+      System.out.println(screen.getDisplayMode());
       System.out.println(screen.getDefaultConfiguration().getBounds());
-      x = screen.getDefaultConfiguration().getBounds().x;
-      y = screen.getDefaultConfiguration().getBounds().y;
+      System.out.println(screen.getDefaultConfiguration().getBounds().getWidth() + " x " + screen.getDefaultConfiguration().getBounds().getHeight());
+      System.out.println(screen.getDefaultConfiguration().getBounds().getX() + " / " + screen.getDefaultConfiguration().getBounds().getY());
+    }
+  }
+
+
+  private JMenu generateWindowSetupMenu(){
+    JMenu windowSetupMenu = new JMenu("Fenster");
+
+    GraphicsEnvironment virtualGraphicsEvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsDevice[] screens = virtualGraphicsEvironment.getScreenDevices();
+    MonitorDescriptor[] monitorDescriptors = new MonitorDescriptor[screens.length];
+
+    ActionListener windowMenuItemListener = (ActionEvent event)->{
+      if(event.getActionCommand().equals(ACTION_COMMAND_MAXIMIZE_WINDOW)){
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+      } else if(event.getActionCommand().equals(ACTION_COMMAND_PACK_WINDOW)){
+        this.pack();
+      } else if(event.getActionCommand().contains(ACTION_COMMAND_MONITOR_PREFIX)){
+        for(MonitorDescriptor monitorDescriptor : monitorDescriptors){
+          if(event.getActionCommand().equals(monitorDescriptor.getActionCommand())){
+            this.setLocation(monitorDescriptor.getLocationPoint());
+          }
+        }
+      }
+    };
+
+    for(int i = 0; i < screens.length; i++){
+      monitorDescriptors[i] = new MonitorDescriptor(screens[i], i);
+      JMenuItem monitor = new JMenuItem(monitorDescriptors[i].getLabel());
+      monitor.setActionCommand(monitorDescriptors[i].getActionCommand());
+      monitor.addActionListener(windowMenuItemListener);
+
+      windowSetupMenu.add(monitor);
     }
 
+    JMenuItem maximizeItem = new JMenuItem("maximieren");
+    maximizeItem.setActionCommand(ACTION_COMMAND_MAXIMIZE_WINDOW);
+    maximizeItem.addActionListener(windowMenuItemListener);
+    JMenuItem packItem = new JMenuItem("verkleinern");
+    packItem.setActionCommand(ACTION_COMMAND_PACK_WINDOW);
+    packItem.addActionListener(windowMenuItemListener);
 
+    windowSetupMenu.addSeparator();
+    windowSetupMenu.add(maximizeItem);
+    windowSetupMenu.add(packItem);
 
-    new Logon(x, y);
+    return windowSetupMenu;
+  }
+
+  class MonitorDescriptor{
+    private GraphicsDevice screen;
+    private Point locationPoint;
+    private String actionCommand;
+    private String label;
+
+    MonitorDescriptor(GraphicsDevice screen, int index) {
+      this.screen = screen;
+      this.label = "Monitor " + (index+1) + " ("+screen.getDisplayMode()+")";
+      this.locationPoint = new Point(screen.getDefaultConfiguration().getBounds().x, screen.getDefaultConfiguration().getBounds().y);
+      this.actionCommand = ACTION_COMMAND_MONITOR_PREFIX + index;
+    }
+
+    Point getLocationPoint(){
+      return locationPoint;
+    }
+
+    String getActionCommand(){
+      return actionCommand;
+    }
+
+    String getLabel(){
+      return label;
+    }
   }
 }

@@ -5,33 +5,31 @@ public class SortingAlgorithms {
 
   public static void main(String[] args) {
     int[] toSort = {50, 70, 100, 80, 40, 30, 20, 10 ,60};
-
     System.out.println("Unsortiert: ");
     printArray(toSort);
 
     int[] sorted = bubbleSort(toSort.clone());
-
     System.out.println("Bubble Sort V1 sortiert: ");
     printArray(sorted);
 
     sorted = bubbleSortV2(toSort.clone());
-
     System.out.println("Bubble Sort V2 sortiert: ");
     printArray(sorted);
 
     sorted = bubbleSortV3(toSort.clone());
-
     System.out.println("Bubble Sort V3 sortiert: ");
     printArray(sorted);
 
     sorted = bubbleSortV3(sorted.clone());
-
     System.out.println("Bubble Sort V3 vor-sortiert: ");
     printArray(sorted);
 
     sorted = selectionSort(toSort.clone());
-
     System.out.println("Selection Sort sortiert: ");
+    printArray(sorted);
+
+    sorted = quickSort(toSort.clone());
+    System.out.println("Quick Sort sortiert: ");
     printArray(sorted);
   }
 
@@ -50,7 +48,7 @@ public class SortingAlgorithms {
 
     long stopTime = System.nanoTime();
 
-    System.out.println("BubbleSort Runtime " + numbers.length + " Elemente: " + (stopTime - startTime) + " ns");
+    printRuntimeDuration("BubbleSort V1", numbers.length, startTime, stopTime);
 
     return numbers;
   }
@@ -70,7 +68,7 @@ public class SortingAlgorithms {
 
     long stopTime = System.nanoTime();
 
-    System.out.println("BubbleSort Runtime V2 " + numbers.length + " Elemente: " + (stopTime - startTime) + " ns");
+    printRuntimeDuration("BubbleSort V2", numbers.length, startTime, stopTime);
 
     return numbers;
   }
@@ -96,7 +94,7 @@ public class SortingAlgorithms {
 
     long stopTime = System.nanoTime();
 
-    System.out.println("BubbleSort Runtime V3 " + numbers.length + " Elemente: " + (stopTime - startTime) + " ns");
+    printRuntimeDuration("BubbleSort V3", numbers.length, startTime, stopTime);
 
     return numbers;
   }
@@ -121,9 +119,52 @@ public class SortingAlgorithms {
 
     long stopTime = System.nanoTime();
 
-    System.out.println("Selection Runtime " + numbers.length + " Elemente: " + (stopTime - startTime) + " ns");
+    printRuntimeDuration("SelectionSort", numbers.length, startTime, stopTime);
 
     return numbers;
+  }
+
+  public static int[] quickSort(int[] numbers){
+    long startTime = System.nanoTime();
+
+    quickSort(numbers, 0, numbers.length-1);
+
+    long stopTime = System.nanoTime();
+    printRuntimeDuration("QuickSort", numbers.length, startTime, stopTime);
+    return numbers;
+  }
+
+  private static void quickSort(int[] numbers, int left, int right){
+
+    int indexLeft = left;
+    int indexRight = right;
+
+    if(left < right){
+      int pivot = numbers[(indexLeft + indexRight) / 2];
+
+      while(indexLeft <= indexRight){
+        while(numbers[indexLeft] < pivot){
+          indexLeft++;
+        }
+        while(numbers[indexRight] > pivot){
+          indexRight--;
+        }
+        if(indexLeft <= indexRight){
+          swap(numbers, indexLeft, indexRight);
+          indexLeft++;
+          indexRight--;
+        }
+      }
+
+      if(left < indexRight){
+        quickSort(numbers, left, indexRight);
+      }
+      if(indexLeft < right){
+        quickSort(numbers, indexLeft, right);
+      }
+
+    }
+
   }
 
   public static void printArray(int[] numbers){
@@ -137,5 +178,12 @@ public class SortingAlgorithms {
     int temp = array[a];
     array[a] = array[b];
     array[b] = temp;
+  }
+
+  private static void printRuntimeDuration(String algorithmName, int elementCount, long startTime, long endTime){
+    long durationInNanoSeconds = endTime - startTime;
+    long durationInMilliSeconds = (long) (durationInNanoSeconds / 10e5);
+
+    System.out.println("Runtime for " + elementCount + " on " + algorithmName + ": " + durationInNanoSeconds + " ns (" + durationInMilliSeconds + " ms)");
   }
 }

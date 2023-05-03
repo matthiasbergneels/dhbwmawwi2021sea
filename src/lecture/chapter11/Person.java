@@ -8,7 +8,7 @@ public class Person implements Serializable {
 
   private String name;
   private String familyName;
-  private String fullName;
+  private transient String fullName;
 
   public Person(String name, String familyName){
     this.name = name;
@@ -36,4 +36,5 @@ public class Person implements Serializable {
       ", fullName='" + fullName + '\'' +
       '}';
   }
+
 }

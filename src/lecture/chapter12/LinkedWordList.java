@@ -77,7 +77,6 @@ private void printWordList(WordNode wordNode){
 }
 
 public boolean remove(String word){
-
     if(firstWordNode != null){
 
       if(firstWordNode.getWord().equals(word)){
